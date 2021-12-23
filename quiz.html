@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Private Pilot Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="hero-unit">
+            <h4>Question: <span id="questionID"></span></h4>
+            <p id="question" style="font-family: 'Lucida Console', Monaco, monospace;"></p>
+            <br /><br />
+            <h4>Options:</h4>
+            <div id="options"></div>
+            <br /><br />
+            <button class="btn" onclick="showAnswer()">Check Answer</button>
+        </div>
+    </div>
+
+    <!-- javascript -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.getJSON("data.json", function(data) {
+                var questionID = Math.floor((Math.random() * data.length));
+                var question = data[questionID]
+                $('#question').html(question.question);
+                $('#questionID').text(question.id);
+
+                var options = question.choices;
+                options.push(question.answer);
+                options.sort();
+
+                $.each(shuffle(options), function(i, item) {
+                    correct = '';
+                    if (item == question.answer) {
+                        correct = '<i id="correct" class="bi bi-check hide"></i>';
+                    }
+
+                    $('#options').append('<div class="form-check"><input class="form-check-input" type="radio" name="choice" id="c' + i + '"><label class="form-check-label" style="display: inline;" for="c' + i + '"> ' + item + '</label>' + correct + '</div>')
+                });
+            }).fail(function() {
+                console.log("An error has occurred.");
+            });
+
+            function shuffle(array) {
+                let currentIndex = array.length,
+                    randomIndex;
+
+                // While there remain elements to shuffle...
+                while (currentIndex != 0) {
+
+                    // Pick a remaining element...
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+
+                    // And swap it with the current element.
+                    [array[currentIndex], array[randomIndex]] = [
+                        array[randomIndex], array[currentIndex]
+                    ];
+                }
+
+                return array;
+            }
+        });
+
+        function showAnswer() {
+            $('#correct').show();
+        }
+    </script>
+</body>
+
+</html>
