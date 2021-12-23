@@ -1,0 +1,35 @@
+body {
+    font-family: 'Lucida Console', Monaco, monospace;
+}
+
+#correct {
+    color: darkgreen;
+    font-size: 1.5em;
+    vertical-align: bottom;
+}
+
+#buttons,
+#score {
+    padding-top: 20px;
+}
+
+.correctAnswer {
+    background-color: lightgreen;
+}
+
+.wrongAnswer {
+    background-color: lightpink;
+}
+
+.form-check {
+    padding-left: 50px;
+    padding-top: 5px;
+}
+
+.right {
+    float: right;
+}
+
+.figureimage {
+    max-width: 100%;
+}
