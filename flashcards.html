@@ -65,6 +65,7 @@
 
         $(document).ready(function() {
             var qid = getUrlVars()["qid"];
+
             $.getJSON("data.json", function(data) {
                 questionData = data;
                 if (qid != undefined) {
