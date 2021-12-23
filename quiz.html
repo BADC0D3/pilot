@@ -116,8 +116,13 @@
             options.push(answer);
             options.sort();
 
+            var shuffleOptions = unique(shuffle(options));
+            while (shuffleOptions.length != 3) {
+                shuffleOptions = unique(shuffle(options));
+            }
+
             $('#options').html('');
-            $.each(shuffle(options), function(i, item) {
+            $.each(shuffleOptions, function(i, item) {
                 correct = '';
                 if (item == question.answer) {
                     correct = 'correct';
@@ -164,6 +169,14 @@
             }
 
             return array;
+        }
+
+        function unique(list) {
+            var result = [];
+            $.each(list, function(i, e) {
+                if ($.inArray(e, result) == -1) result.push(e);
+            });
+            return result;
         }
 
         function showAnswer() {
