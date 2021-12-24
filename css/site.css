@@ -1,9 +1,50 @@
 body {
-    font-family: 'Lucida Console', Monaco, monospace;
+    margin: 0;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: var(--bs-body-color);
+    text-align: var(--bs-body-text-align);
+    background-color: var(--bs-body-bg);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+#mainContainer {
+    padding-top: 30px;
+}
+
+.border-primary {
+    border: var(--bs-border);
+}
+
+.card-header {
+    background-color: var(--bs-secondary);
+    border-bottom: var(--bs-card-header-border-bottom);
+}
+
+.card {
+    background-color: var(--bs-card-background-color);
+    color: var(--bs-card-color);
+}
+
+.correctAnswer {
+    background-color: var(--bs-correct-answer-background-color);
+    color: var(--bs-correct-answer-color);
+}
+
+.wrongAnswer {
+    background-color: var(--bs-wrong-answer-background-color);
+    color: var(--bs-wrong-answer-color);
+}
+
+.searchCard {
+    padding: 2.5rem;
 }
 
 #correct {
-    color: darkgreen;
+    color: var(--bs-correct-answer-background-color);
     font-size: 1.5em;
     vertical-align: bottom;
 }
@@ -11,14 +52,6 @@ body {
 #buttons,
 #score {
     padding-top: 20px;
-}
-
-.correctAnswer {
-    background-color: lightgreen;
-}
-
-.wrongAnswer {
-    background-color: lightpink;
 }
 
 .form-check {
@@ -35,7 +68,7 @@ body {
 }
 
 .searchresult {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .bd-flashcard {
@@ -54,10 +87,10 @@ body {
     display: block;
     padding: .25rem .5rem;
     font-size: .65em;
-    color: #0d6efd;
-    background-color: #fff;
     border: 1px solid;
     border-radius: .25rem;
+    background-color: #fff;
+    color: #0d6efd;
 }
 
 button:focus:not(:focus-visible) {
@@ -66,6 +99,20 @@ button:focus:not(:focus-visible) {
 
 .btn-flashcard:hover,
 .btn-flashcard:focus {
-    color: #fff;
     background-color: #0d6efd;
+    color: #fff;
+}
+
+.form-check-input:disabled~.form-check-label,
+.form-check-input[disabled]~.form-check-label {
+    opacity: 1.0;
+}
+
+.modal-content {
+    background-color: var(--bs-card-background-color);
+    color: var(--bs-card-color);
+}
+
+.modal-dialog {
+    max-width: 650px;
 }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Private Pilot | Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
+    <link href="css/dark.css" rel="stylesheet" type="text/css" />
+    <link href="css/site.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="bootstrap-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Private Pilot</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/quiz.html">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/flashcards.html">Flash-Cards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/answer.html">Answers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search.html">Search</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mainContainer" class="container">
+        <div id="results"></div>
+    </div>
+
+    <!-- javascript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
+
+    <script id="flashCard" type="x-template">
+        <div class="card searchresult border-primary">
+                <div class="card-header py-3">
+                    <p class="my-0 fw-normal"><b>Question: <span id="questionID">{{id}}</span></b></p>
+                </div>
+                <div class="card-body">
+                    <p id="question">{{{question}}}</p>
+                    <span id="figures">
+                        {{#each figure}}
+                        <img class="figureimage" src="{{this}}"/>
+                        {{/each}}
+                    </span>
+                </div>
+                <div class="card-footer">
+                    <div>Answer:</div>
+                    <div id="options">
+                        
+                        <div class="form-check correctAnswer">
+                            <input class="form-check-input" type="radio" name="c{{id}}" disabled=disabled checked>
+                            <label class="form-check-label correct" style="display: inline;"> {{answer}}</label>
+                        </div>
+
+                        {{#each choices}}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="c{{id}}" disabled=disabled>
+                            <label class="form-check-label correct" style="display: inline;"> {{this}}</label>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+        </div>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $.getJSON("data.json", function(data) {
+                $.each(data, function(i, item) {
+                    var template = Handlebars.compile($("#flashCard").html());
+                    $('#results').append(template(item));
+                });
+            }).fail(function() {
+                console.log("An error has occurred.");
+            });
+        });
+    </script>
+</body>
+
+</html>
